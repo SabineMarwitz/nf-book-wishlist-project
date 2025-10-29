@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import BookItems from './components/BookItems';
+import BookForm from './components/BookForm';
 
 type Book = {
   id?: number;
@@ -9,15 +11,6 @@ type Book = {
 };
 
 type BookList = Book[];
-
-function BookItems(props: { bookList: Book[] }) {
-  const books = props.bookList.map((book: Book) => (
-    <li key={book.id}>
-      {book.title}, {book.author}
-    </li>
-  ));
-  return <ul>{books}</ul>;
-}
 
 let bookList: BookList = [
   {
@@ -29,43 +22,24 @@ let bookList: BookList = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0); // count = highest used id
   const [books, setBooks] = useState<BookList>(bookList);
 
-  function updateList(formData: { get: (arg0: string) => any }): void {
+  function addBook(formData: { get: (arg0: string) => any }): void {
     const id = count + 1;
     const author = formData.get('author');
     const title = formData.get('title');
-    const newBook: Book = { id, author, title, read: false };
-
-    setBooks([newBook, ...books]);
+    setBooks([{ id, author, title, read: false }, ...books]);
     setCount(id);
   }
 
   return (
     <>
       <h1>Book Wishlist App</h1>
+
       <div className='card1'>
         <h2>Add Book:</h2>
-        <form action={updateList}>
-          <p>
-            <input
-              type='text'
-              placeholder='Author'
-              name='author'
-              required
-            ></input>
-          </p>
-          <p>
-            <input
-              type='text'
-              placeholder='Title'
-              name='title'
-              required
-            ></input>
-          </p>
-          <button type='submit'>Submit</button>
-        </form>
+        <BookForm addBook={addBook}></BookForm>
       </div>
 
       <div className='card2'>
