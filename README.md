@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Project: Book Wishlist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a TypeScript React Exercise from the AWD training (NF).
 
-Currently, two official plugins are available:
+## Objective:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Build a small React + TypeScript app where users can manage a wishlist of books.
 
-## React Compiler
+## Core Requirements
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Data Model
 
-## Expanding the ESLint configuration
+Define a Book type that includes:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- id (number)
+- title (string)
+- author (string)
+- read (boolean)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. App Component
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Create the main App component that:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Initializes a list of books in state
+- Provides functionality to:
+  - Add a book
+  - Mark a book as read/unread
+  - Remove a book
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Book Form Component
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a form component that:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Accepts input for title and author
+- On submit, calls a callback (from parent) to add a new book
+- Validates that neither field is empty before submission
+
+### 4. Book Item Component
+
+Create a component that:
+
+- Displays the book’s title and author
+- Shows a checkbox for toggling the “read” status
+- Shows a delete button to remove the book
+
+## Bonus Tasks (Optional, Intermediate)
+
+### 5. Filter Books
+
+- Add a dropdown or buttons to filter the book list by:
+  - All
+  - Read
+  - Unread
+
+### 6. Styling (Optional)
+
+- Use Tailwind CSS, CSS Modules, or Styled Components
+- Highlight read books with strikethrough or dimmed style
