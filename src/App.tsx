@@ -12,7 +12,7 @@ type Book = {
 
 type BookList = Book[];
 
-let bookList: BookList = [
+const bookList: BookList = [
   {
     id: 0,
     author: 'Benjamin Lebert',
@@ -33,6 +33,11 @@ function App() {
     setCount(id);
   }
 
+  function deleteBook(id: number) {
+    const updatedBookList = books.filter((book) => book.id !== id);
+    setBooks(updatedBookList);
+  }
+
   return (
     <>
       <h1>Book Wishlist App</h1>
@@ -44,7 +49,7 @@ function App() {
 
       <div className='card2'>
         <h2>Book List:</h2>
-        <BookItems bookList={books} />
+        <BookItems bookList={books} deleteBook={deleteBook} />
       </div>
     </>
   );
