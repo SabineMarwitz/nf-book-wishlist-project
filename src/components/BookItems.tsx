@@ -1,3 +1,5 @@
+import CheckBox from './CheckBox';
+
 type Book = {
   id?: number;
   author: string;
@@ -8,16 +10,14 @@ type Book = {
 type PropsType = {
   bookList: Book[];
   deleteBook: (id: number) => void;
+  updateBookReadStatus: (id: number) => void;
 };
 
 function BookItems(props: PropsType) {
   const books = props.bookList.map((book: Book) => (
     <li key={book.id}>
       {book.title}, {book.author} ...
-      <>
-        <label htmlFor='read'>Read</label>
-        <input type='checkbox' id='read' name='readFlag'></input>
-      </>
+      <CheckBox book={book} updateBook={props.updateBookReadStatus} />
       <button key={book.id} onClick={() => props.deleteBook(book.id!)}>
         Delete Book
       </button>

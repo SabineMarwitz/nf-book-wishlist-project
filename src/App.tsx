@@ -38,6 +38,17 @@ function App() {
     setBooks(updatedBookList);
   }
 
+  function updateBookReadStatus(id: number) {
+    // update read status by id
+    const updatedBookList = books.map((book) => {
+      if (book.id === id) {
+        book.read = !book.read;
+      }
+      return book;
+    });
+    setBooks(updatedBookList);
+  }
+
   return (
     <>
       <h1>Book Wishlist App</h1>
@@ -49,7 +60,11 @@ function App() {
 
       <div className='card2'>
         <h2>Book List:</h2>
-        <BookItems bookList={books} deleteBook={deleteBook} />
+        <BookItems
+          bookList={books}
+          deleteBook={deleteBook}
+          updateBookReadStatus={updateBookReadStatus}
+        />
       </div>
     </>
   );
