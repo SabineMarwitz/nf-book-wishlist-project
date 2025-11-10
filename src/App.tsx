@@ -2,13 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import BookItems from './components/BookItems';
 import BookForm from './components/BookForm';
-
-type Book = {
-  id?: number;
-  author: string;
-  title: string;
-  read: boolean;
-};
+import type { Book } from './types/book';
 
 type BookList = Book[];
 

@@ -1,11 +1,5 @@
+import type { Book } from '../types/book';
 import CheckBox from './CheckBox';
-
-type Book = {
-  id?: number;
-  author: string;
-  title: string;
-  read: boolean;
-};
 
 type PropsType = {
   bookList: Book[];

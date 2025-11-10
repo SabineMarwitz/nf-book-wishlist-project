@@ -1,9 +1,4 @@
-type Book = {
-  id?: number;
-  author: string;
-  title: string;
-  read: boolean;
-};
+import type { Book } from '../types/book';
 
 type PropsType = {
   book: Book;
