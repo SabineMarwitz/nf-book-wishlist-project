@@ -3,6 +3,7 @@ import './App.css';
 import BookItems from './components/BookItems';
 import BookForm from './components/BookForm';
 import type { Book } from './types/book';
+import BookFilter from './components/BookFilter';
 
 type BookList = Book[];
 
@@ -18,6 +19,11 @@ const bookList: BookList = [
 function App() {
   const [count, setCount] = useState<number>(0); // count = highest used id
   const [books, setBooks] = useState<BookList>(bookList);
+  const [filter, setFilter] = useState<string>('');
+
+  function updateFilter(value: string) {
+    setFilter(value);
+  }
 
   function addBook(formData: { get: (arg0: string) => any }): void {
     const id = count + 1;
@@ -52,10 +58,19 @@ function App() {
         <BookForm addBook={addBook}></BookForm>
       </div>
 
+      <div className='filter'>
+        <h2>Book Filter:</h2>
+        <BookFilter
+          currentValue={filter}
+          updateFilter={updateFilter}
+        ></BookFilter>
+      </div>
+
       <div className='card2'>
         <h2>Book List:</h2>
         <BookItems
           bookList={books}
+          value={filter}
           deleteBook={deleteBook}
           updateBookReadStatus={updateBookReadStatus}
         />
