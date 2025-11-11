@@ -19,15 +19,32 @@ function filter(bookList: Book[], value: string) {
 function BookItems(props: PropsType) {
   const filteredList = filter(props.bookList, props.value);
   const books = filteredList.map((book: Book) => (
-    <li key={book.id}>
-      {book.title}, {book.author} ...
-      <CheckBox book={book} updateBook={props.updateBookReadStatus} />
-      <button key={book.id} onClick={() => props.deleteBook(book.id!)}>
-        Delete Book
-      </button>
-    </li>
+    <tr key={book.id}>
+      <td>{book.title}</td>
+      <td>{book.author}</td>
+      <td>
+        {' '}
+        <CheckBox book={book} updateBook={props.updateBookReadStatus} />
+      </td>
+      <td>
+        <button key={book.id} onClick={() => props.deleteBook(book.id!)}>
+          Delete
+        </button>
+      </td>
+    </tr>
   ));
-  return <ul>{books}</ul>;
+
+  return (
+    <table className='bookTable'>
+      <thead>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>{books}</tbody>
+    </table>
+  );
 }
 
 export default BookItems;
